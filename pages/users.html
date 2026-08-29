@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GROCERIA - User Management</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f6;
+    color: #26312b;
+}
+
+/* HEADER */
+
+.top-header {
+    height: 62px;
+    background: #075c43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.profile {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    background: white;
+    color: #075c43;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 62px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 225px;
+    background: white;
+    border-right: 1px solid #dce5df;
+
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    font-size: 10px;
+    color: #89928c;
+
+    text-transform: uppercase;
+
+    padding: 0 12px 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 4px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+
+    color: #4d5952;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.icon {
+    width: 20px;
+    text-align: center;
+}
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+    padding: 28px;
+
+    overflow-x: auto;
+}
+
+.page-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.heading h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.heading p {
+    color: #7a847e;
+    font-size: 13px;
+}
+
+/* ADD BUTTON */
+
+.add-button {
+    background: #087b45;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 12px 18px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: #066b3c;
+}
+
+/* SUMMARY */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 18px;
+}
+
+.summary-card p {
+    color: #7a847e;
+
+    font-size: 11px;
+
+    margin-bottom: 10px;
+}
+
+.summary-card h2 {
+    font-size: 22px;
+}
+
+/* USER BOX */
+
+.user-box {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 20px;
+}
+
+/* TOOLBAR */
+
+.toolbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.search {
+    width: 360px;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 12px;
+}
+
+.search:focus {
+    border-color: #087b45;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 950px;
+}
+
+th {
+    background: #f6f9f7;
+
+    color: #68736c;
+
+    font-size: 10px;
+
+    text-align: left;
+
+    padding: 13px;
+
+    border-bottom: 1px solid #dce5df;
+}
+
+td {
+    padding: 13px;
+
+    border-bottom: 1px solid #edf0ee;
+
+    font-size: 11px;
+}
+
+tr:hover {
+    background: #fafcfb;
+}
+
+/* USER */
+
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: #e6f5ec;
+
+    color: #087b45;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.user-name {
+    font-weight: bold;
+
+    font-size: 11px;
+}
+
+.user-email {
+    color: #89928c;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+}
+
+/* ROLE */
+
+.role {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.admin-role {
+    background: #eee8ff;
+
+    color: #6840a8;
+}
+
+.manager-role {
+    background: #e6f5ec;
+
+    color: #087b45;
+}
+
+.billing-role {
+    background: #eef2ff;
+
+    color: #4654a8;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.active-status {
+    background: #e6f5ec;
+
+    color: #087b45;
+}
+
+.inactive-status {
+    background: #fde8e8;
+
+    color: #b42318;
+}
+
+/* ACTIONS */
+
+.actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+.edit,
+.disable,
+.enable {
+    border: none;
+
+    border-radius: 4px;
+
+    padding: 6px 9px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.edit {
+    background: #eef2ff;
+
+    color: #4654a8;
+}
+
+.disable {
+    background: #fde8e8;
+
+    color: #b42318;
+}
+
+.enable {
+    background: #e6f5ec;
+
+    color: #087b45;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal-box {
+    width: 500px;
+
+    max-width: 92%;
+
+    background: white;
+
+    border-radius: 8px;
+
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+}
+
+.close {
+    border: none;
+
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    color: #5e6862;
+
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 10px;
+
+    outline: none;
+
+    font-size: 12px;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087b45;
+}
+
+.save-button {
+    width: 100%;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #087b45;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+
+    .summary {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar-title,
+    .menu span {
+        display: none;
+    }
+
+    .menu a {
+        justify-content: center;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+    <div class="header-right">
+
+        <span>🔔</span>
+
+        <span>⚙</span>
+
+        <span>Admin</span>
+
+        <div class="profile">
+            AD
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Management
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li>
+            <a href="admin-dashboard.html">
+
+                <span class="icon">▦</span>
+                <span>Dashboard</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="products.html">
+
+                <span class="icon">📦</span>
+                <span>Products</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="categories.html">
+
+                <span class="icon">▤</span>
+                <span>Categories</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="customers.html">
+
+                <span class="icon">👥</span>
+                <span>Customers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="suppliers.html">
+
+                <span class="icon">🚚</span>
+                <span>Suppliers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="purchases.html">
+
+                <span class="icon">🛒</span>
+                <span>Purchases</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="sales.html">
+
+                <span class="icon">🧾</span>
+                <span>Sales / Billing</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="inventory.html">
+
+                <span class="icon">📊</span>
+                <span>Inventory</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="payments.html">
+
+                <span class="icon">₹</span>
+                <span>Payments</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="reports.html">
+
+                <span class="icon">📈</span>
+                <span>Reports</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="users.html"
+               class="active">
+
+                <span class="icon">👤</span>
+                <span>Users</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="../index.html">
+
+                <span class="icon">↪</span>
+                <span>Logout</span>
+
+            </a>
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+    <!-- HEADING -->
+
+    <div class="page-heading">
+
+        <div class="heading">
+
+            <h1>
+                User Management
+            </h1>
+
+            <p>
+                Manage system users and their access roles
+            </p>
+
+        </div>
+
+
+        <button
+            class="add-button"
+            onclick="openModal()">
+
+            + Add User
+
+        </button>
+
+    </div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <p>
+                Total Users
+            </p>
+
+            <h2>
+                12
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Admins
+            </p>
+
+            <h2>
+                2
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Managers
+            </p>
+
+            <h2>
+                4
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Billing Staff
+            </p>
+
+            <h2>
+                6
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- USER TABLE -->
+
+    <section class="user-box">
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Search user, email or role..."
+                onkeyup="searchUsers()">
+
+        </div>
+
+
+
+        <div class="table-container">
+
+
+            <table id="userTable">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            USER
+                        </th>
+
+                        <th>
+                            ROLE
+                        </th>
+
+                        <th>
+                            PHONE
+                        </th>
+
+                        <th>
+                            LAST LOGIN
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- USER 1 -->
+
+                    <tr>
+
+                        <td>
+
+                            <div class="user-info">
+
+                                <div class="user-avatar">
+                                    AD
+                                </div>
+
+                                <div>
+
+                                    <div class="user-name">
+                                        Ahmed Shaikh
+                                    </div>
+
+                                    <div class="user-email">
+                                        admin@groceria.com
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="role admin-role">
+                                Admin
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            +91 98765 43210
+                        </td>
+
+
+                        <td>
+                            Today, 09:20 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active-status">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="edit"
+                                    onclick="editUser()">
+
+                                    Edit
+
+                                </button>
+
+                                <button
+                                    class="disable"
+                                    onclick="disableUser()">
+
+                                    Disable
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- USER 2 -->
+
+                    <tr>
+
+                        <td>
+
+                            <div class="user-info">
+
+                                <div class="user-avatar">
+                                    RK
+                                </div>
+
+                                <div>
+
+                                    <div class="user-name">
+                                        Rahul Kumar
+                                    </div>
+
+                                    <div class="user-email">
+                                        rahul@groceria.com
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="role manager-role">
+                                Manager
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            +91 98234 56781
+                        </td>
+
+
+                        <td>
+                            Today, 10:15 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active-status">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="edit"
+                                    onclick="editUser()">

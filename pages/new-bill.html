@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GROCERIA - New Bill</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f6;
+    color: #26312b;
+}
+
+/* HEADER */
+
+.top-header {
+    height: 62px;
+    background: #075c43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.header-icon {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profile-small {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    background: white;
+    color: #075c43;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 62px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 225px;
+    background: white;
+    border-right: 1px solid #dce5df;
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    font-size: 10px;
+    color: #89928c;
+    text-transform: uppercase;
+    padding: 0 12px 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 4px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+    color: #4d5952;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.icon {
+    width: 20px;
+    text-align: center;
+}
+
+/* MAIN */
+
+.content {
+    flex: 1;
+    padding: 25px;
+}
+
+.page-heading {
+    margin-bottom: 20px;
+}
+
+.page-heading h1 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.page-heading p {
+    color: #7a847e;
+    font-size: 13px;
+}
+
+/* POS AREA */
+
+.pos-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+/* PRODUCTS */
+
+.products-card,
+.bill-card {
+    background: white;
+    border: 1px solid #dce5df;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* SEARCH */
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.search-box input {
+    flex: 1;
+
+    height: 40px;
+
+    border: 1px solid #d5ded8;
+    border-radius: 5px;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 11px;
+}
+
+.search-box input:focus {
+    border-color: #087b45;
+}
+
+/* PRODUCT GRID */
+
+.product-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.product {
+    border: 1px solid #dce5df;
+
+    border-radius: 6px;
+
+    padding: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.product:hover {
+    border-color: #087b45;
+    background: #f4faf6;
+}
+
+.product-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #e6f5ec;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    margin-bottom: 9px;
+}
+
+.product h3 {
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.product p {
+    color: #89928c;
+    font-size: 9px;
+    margin-bottom: 7px;
+}
+
+.product-price {
+    color: #087b45;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* BILL */
+
+.bill-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.bill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #edf0ee;
+
+    margin-bottom: 12px;
+}
+
+.bill-number {
+    font-size: 9px;
+    color: #89928c;
+}
+
+/* CUSTOMER */
+
+.customer-box {
+    margin-bottom: 15px;
+}
+
+.customer-box label {
+    display: block;
+
+    font-size: 9px;
+
+    color: #68736c;
+
+    margin-bottom: 6px;
+}
+
+.customer-box input {
+    width: 100%;
+
+    height: 36px;
+
+    border: 1px solid #d5ded8;
+
+    border-radius: 5px;
+
+    padding: 0 10px;
+
+    font-size: 10px;
+
+    outline: none;
+}
+
+/* CART */
+
+.cart {
+    min-height: 180px;
+    max-height: 260px;
+
+    overflow-y: auto;
+
+    border-bottom: 1px solid #edf0ee;
+
+    margin-bottom: 15px;
+}
+
+.cart-empty {
+    text-align: center;
+
+    padding: 55px 10px;
+
+    color: #89928c;
+
+    font-size: 11px;
+}
+
+.cart-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid #f0f2f1;
+}
+
+.item-name {
+    flex: 1;
+
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.item-price {
+    font-size: 10px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity button {
+    width: 23px;
+    height: 23px;
+
+    border: 1px solid #d5ded8;
+
+    background: white;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.quantity span {
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 10px;
+}
+
+/* SUMMARY */
+
+.summary {
+    margin-top: auto;
+}
+
+.summary-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    font-size: 10px;
+}
+
+.summary-row.total {
+    border-top: 1px solid #dce5df;
+
+    padding-top: 13px;
+
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #087b45;
+}
+
+/* DISCOUNT */
+
+.discount-box {
+    display: flex;
+
+    gap: 8px;
+
+    margin: 12px 0;
+}
+
+.discount-box input {
+    flex: 1;
+
+    height: 32px;
+
+    border: 1px solid #d5ded8;
+
+    border-radius: 4px;
+
+    padding: 0 8px;
+
+    font-size: 9px;
+}
+
+.discount-box button {
+    background: white;
+
+    border: 1px solid #087b45;
+
+    color: #087b45;
+
+    border-radius: 4px;
+
+    padding: 0 10px;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+/* PAYMENT */
+
+.payment-title {
+    font-size: 10px;
+
+    color: #68736c;
+
+    margin: 15px 0 8px;
+}
+
+.payment-methods {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 7px;
+}
+
+.payment-method {
+    border: 1px solid #d5ded8;
+
+    background: white;
+
+    border-radius: 5px;
+
+    padding: 9px 5px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    font-size: 9px;
+}
+
+.payment-method:hover,
+.payment-method.selected {
+    border-color: #087b45;
+
+    background: #e6f5ec;
+
+    color: #087b45;
+}
+
+/* BUTTONS */
+
+.action-buttons {
+    display: grid;
+
+    grid-template-columns: 1fr 2fr;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.clear-btn,
+.generate-btn {
+    height: 40px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.clear-btn {
+    border: 1px solid #d5ded8;
+
+    background: white;
+
+    color: #59645e;
+}
+
+.generate-btn {
+    border: 1px solid #087b45;
+
+    background: #087b45;
+
+    color: white;
+}
+
+.clear-btn:hover {
+    background: #f5f8f6;
+}
+
+.generate-btn:hover {
+    background: #075c43;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+
+    .pos-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar-title,
+    .menu span {
+        display: none;
+    }
+
+    .menu a {
+        justify-content: center;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+    <div class="header-right">
+
+        <span
+            class="header-icon"
+            onclick="goNotifications()">
+            🔔
+        </span>
+
+        <span
+            class="header-icon"
+            onclick="goSettings()">
+            ⚙
+        </span>
+
+        <span>
+            Billing Staff
+        </span>
+
+        <div class="profile-small">
+            BS
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Billing
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="billing-dashboard.html">
+
+                <span class="icon">▦</span>
+                <span>Dashboard</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="new-bill.html"
+               class="active">
+
+                <span class="icon">🧾</span>
+                <span>New Bill</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="sales.html">
+
+                <span class="icon">📑</span>
+                <span>Sales / Invoices</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="payments.html">
+
+                <span class="icon">💳</span>
+                <span>Payments</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="manager-notifications.html">
+
+                <span class="icon">🔔</span>
+                <span>Notifications</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="billing-profile.html">
+
+                <span class="icon">👤</span>
+                <span>My Profile</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="settings.html">
+
+                <span class="icon">⚙</span>
+                <span>Settings</span>
+
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+
+                <span class="icon">↪</span>
+                <span>Logout</span>
+
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="content">
+
+
+    <div class="page-heading">
+
+        <h1>
+            New Bill
+        </h1>
+
+        <p>
+            Create a new customer bill and process payment.
+        </p>
+
+    </div>
+
+
+    <div class="pos-container">
+
+
+        <!-- PRODUCTS -->
+
+        <section class="products-card">
+
+            <div class="card-title">
+                Select Products
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchProduct"
+                    placeholder="Search product..."
+                    onkeyup="searchProducts()">
+
+            </div>
+
+
+            <div
+                class="product-grid"
+                id="productGrid">
+
+
+                <div
+                    class="product"
+                    data-name="Rice 5 KG"
+                    onclick="addProduct('Rice 5 KG', 320, '🍚')">
+
+                    <div class="product-icon">
+                        🍚
+                    </div>
+
+                    <h3>
+                        Rice 5 KG
+                    </h3>
+
+                    <p>
+                        Grocery
+                    </p>
+
+                    <div class="product-price">
+                        ₹320
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Wheat Flour 5 KG"
+                    onclick="addProduct('Wheat Flour 5 KG', 280, '🌾')">
+
+                    <div class="product-icon">
+                        🌾
+                    </div>
+
+                    <h3>
+                        Wheat Flour 5 KG
+                    </h3>
+
+                    <p>
+                        Grocery
+                    </p>
+
+                    <div class="product-price">
+                        ₹280
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Sugar 1 KG"
+                    onclick="addProduct('Sugar 1 KG', 52, '🍬')">
+
+                    <div class="product-icon">
+                        🍬
+                    </div>
+
+                    <h3>
+                        Sugar 1 KG
+                    </h3>
+
+                    <p>
+                        Grocery
+                    </p>
+
+                    <div class="product-price">
+                        ₹52
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Cooking Oil 1L"
+                    onclick="addProduct('Cooking Oil 1L', 145, '🫗')">
+
+                    <div class="product-icon">
+                        🫗
+                    </div>
+
+                    <h3>
+                        Cooking Oil 1L
+                    </h3>
+
+                    <p>
+                        Grocery
+                    </p>
+
+                    <div class="product-price">
+                        ₹145
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Premium Tea 250g"
+                    onclick="addProduct('Premium Tea 250g', 120, '🍵')">
+
+                    <div class="product-icon">
+                        🍵
+                    </div>
+
+                    <h3>
+                        Premium Tea 250g
+                    </h3>
+
+                    <p>
+                        Beverages
+                    </p>
+
+                    <div class="product-price">
+                        ₹120
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Biscuits Pack"
+                    onclick="addProduct('Biscuits Pack', 35, '🍪')">
+
+                    <div class="product-icon">
+                        🍪
+                    </div>
+
+                    <h3>
+                        Biscuits Pack
+                    </h3>
+
+                    <p>
+                        Snacks
+                    </p>
+
+                    <div class="product-price">
+                        ₹35
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Milk 1L"
+                    onclick="addProduct('Milk 1L', 62, '🥛')">
+
+                    <div class="product-icon">
+                        🥛
+                    </div>
+
+                    <h3>
+                        Milk 1L
+                    </h3>
+
+                    <div class="product-price">
+                        ₹62
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Salt 1 KG"
+                    onclick="addProduct('Salt 1 KG', 25, '🧂')">
+
+                    <div class="product-icon">
+                        🧂
+                    </div>
+
+                    <h3>
+                        Salt 1 KG
+                    </h3>
+
+                    <p>
+                        Grocery
+                    </p>
+
+                    <div class="product-price">
+                        ₹25
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="product"
+                    data-name="Soap"
+                    onclick="addProduct('Bath Soap', 40, '🧼')">
+
+                    <div class="product-icon">
+                        🧼
+                    </div>
+
+                    <h3>
+                        Bath Soap
+                    </h3>
+
+                    <p>
+                        Personal Care
+                    </p>
+
+                    <div class="product-price">
+                        ₹40
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BILL -->
+
+        <section class="bill-card">
+
+
+            <div class="bill-header">
+
+                <div class="card-title">
+                    Current Bill
+                </div>
+
+                <div class="bill-number">
+                    Bill No: INV-1090
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="customer-box">
+
+                <label>
+                    CUSTOMER NAME / MOBILE
+                </label>
+
+                <input
+                    type="text"
+                    id="customer"
+                    placeholder="Enter customer name or mobile">
+
+            </div>
+
+
+            <!-- CART -->
+
+            <div
+                class="cart"
+                id="cart">
+
+                <div
+                    class="cart-empty"
+                    id="emptyCart">
+
+                    🛒<br><br>
+                    No products added.<br>
+                    Click a product to add it.
+
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="summary">
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span id="subtotal">
+                        ₹0.00
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <span id="discount">
+                        ₹0.00
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Tax (5%)
+                    </span>
+
+                    <span id="tax">
+                        ₹0.00
+                    </span>
+
+                </div>
+
+
+                <div class="discount-box">
+
+                    <input
+                        type="number"
+                        id="discountInput"
+                        placeholder="Discount ₹">
+
+                    <button
+                        onclick="applyDiscount()">
+
+                        Apply
+
+                    </button>
+
+                </div>
+
+
+                <div class="summary-row total">
+
+                    <span>
+                        Grand Total
+                    </span>
+
+                    <span id="grandTotal">
+                        ₹0.00
+                    </span>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="payment-title">
+                    PAYMENT METHOD
+                </div>
+
+
+                <div class="payment-methods">
+
+
+                    <div
+                        class="payment-method selected"
+                        onclick="selectPayment(this)">
+
+                        💵 Cash
+
+                    </div>
+
+
+                    <div
+                        class="payment-method"
+                        onclick="selectPayment(this)">
+
+                        💳 Card
+
+                    </div>
+
+
+                    <div
+                        class="payment-method"
+                        onclick="selectPayment(this)">
+
+                        📱 UPI
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ACTION -->
+
+                <div class="action-buttons">
+
+
+                    <button
+                        class="clear-btn"
+                        onclick="clearBill()">
+
+                        Clear
+
+                    </button>
+
+
+                    <button
+                        class="generate-btn"
+                        onclick="generateBill()">
+
+                        🧾 Generate Bill
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+/* CART */
+
+let cart = [];
+
+let discountAmount = 0;
+
+
+/* ADD PRODUCT */
+
+function addProduct(name, price, icon) {
+
+    const existing =
+        cart.find(item => item.name === name);
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+            price: price,
+            quantity: 1,
+            icon: icon
+
+        });
+
+    }
+
+    renderCart();
+
+}
+
+
+/* RENDER CART */
+
+function renderCart() {
+
+    const cartElement =
+        document.getElementById("cart");
+
+    if (cart.length === 0) {
+
+        cartElement.innerHTML = `
+            <div class="cart-empty" id="emptyCart">
+                🛒<br><br>
+                No products added.<br>
+                Click a product to add it.
+            </div>
+        `;
+
+        updateSummary();
+
+        return;
+    }
+
+
+    cartElement.innerHTML = "";
+
+
+    cart.forEach((item, index) => {
+
+        const itemElement =
+            document.createElement("div");
+
+        itemElement.className =
+            "cart-item";
+
+
+        itemElement.innerHTML = `
+
+            <div class="item-name">
+                ${item.icon} ${item.name}
+            </div>
+
+            <div class="quantity">
+
+                <button
+                    onclick="changeQuantity(${index}, -1)">
+                    −
+                </button>
+
+                <span>
+                    ${item.quantity}
+                </span>
+
+                <button
+                    onclick="changeQuantity(${index}, 1)">
+                    +
+                </button>
+
+            </div>
+
+            <div class="item-price">
+                ₹${(
+                    item.price *
+                    item.quantity
+                ).toFixed(2)}
+            </div>
+
+        `;
+
+
+        cartElement.appendChild(
+            itemElement
+        );
+
+    });
+
+
+    updateSummary();
+
+}
+
+
+/* QUANTITY */
+
+function changeQuantity(index, change) {
+
+    cart[index].quantity += change;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    renderCart();
+
+}
+
+
+/* SUMMARY */
+
+function updateSummary() {
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal +=
+            item.price *
+            item.quantity;
+
+    });
+
+
+    const tax =
+        (subtotal - discountAmount) *
+        0.05;
+
+
+    const grandTotal =
+        subtotal -
+        discountAmount +
+        tax;
+
+
+    document.getElementById(
+        "subtotal"
+    ).textContent =
+        "₹" + subtotal.toFixed(2);
+
+
+    document.getElementById(
+        "discount"
+    ).textContent =
+        "₹" + discountAmount.toFixed(2);
+
+
+    document.getElementById(
+        "tax"
+    ).textContent =
+        "₹" + tax.toFixed(2);
+
+
+    document.getElementById(
+        "grandTotal"
+    ).textContent =
+        "₹" + grandTotal.toFixed(2);
+
+}
+
+
+/* DISCOUNT */
+
+function applyDiscount() {
+
+    const value =
+        parseFloat(
+            document.getElementById(
+                "discountInput"
+            ).value
+        );
+
+
+    if (isNaN(value) || value < 0) {
+
+        alert(
+            "Please enter a valid discount."
+        );
+
+        return;
+
+    }
+
+
+    discountAmount = value;
+
+    updateSummary();
+
+}
+
+
+/* PAYMENT */
+
+function selectPayment(element) {
+
+    const methods =
+        document.querySelectorAll(
+            ".payment-method"
+        );
+
+
+    methods.forEach(method => {
+
+        method.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    element.classList.add(
+        "selected"
+    );
+
+}
+
+
+/* CLEAR BILL */
+
+function clearBill() {
+
+    if (cart.length === 0) {
+
+        return;
+
+    }
+
+
+    if (
+        confirm(
+            "Are you sure you want to clear this bill?"
+        )
+    ) {
+
+        cart = [];
+
+        discountAmount = 0;
+
+        document.getElementById(
+            "discountInput"
+        ).value = "";
+
+        document.getElementById(
+            "customer"
+        ).value = "";
+
+        renderCart();
+
+    }
+
+}
+
+
+/* GENERATE BILL */
+
+function generateBill() {
+
+    if (cart.length === 0) {
+
+        alert(
+            "Please add at least one product."
+        );
+
+        return;
+
+    }
+
+
+    const customer =
+        document.getElementById(
+            "customer"
+        ).value.trim();
+
+
+    const total =
+        document.getElementById(
+            "grandTotal"
+        ).textContent;
+
+
+    alert(
+        "Bill generated successfully!\n\n" +
+        "Customer: " +
+        (customer || "Walk-in Customer") +
+        "\nTotal: " +
+        total
+    );
+
+}
+
+
+/* SEARCH */
+
+function searchProducts() {
+
+    const search =
+        document.getElementById(
+            "searchProduct"
+        ).value.toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(
+            ".product"
+        );
+
+
+    products.forEach(product => {
+
+        const name =
+            product
+                .getAttribute("data-name")
+                .toLowerCase();
+
+
+        if (name.includes(search)) {
+
+            product.style.display =
+                "block";
+
+        } else {
+
+            product.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/* HEADER */
+
+function goNotifications() {
+
+    window.location.href =
+        "manager-notifications.html";
+
+}
+
+
+function goSettings() {
+
+    window.location.href =
+        "settings.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

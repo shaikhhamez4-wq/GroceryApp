@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GROCERIA - Select Role</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: #f7faf8;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #222;
+        }
+
+        .container {
+            width: 850px;
+            max-width: 92%;
+            background: white;
+
+            border: 1px solid #dce5df;
+            border-radius: 10px;
+
+            padding: 45px 40px;
+
+            text-align: center;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 6px;
+        }
+
+        .cart {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #075c43;
+        }
+
+        .tagline {
+            font-size: 12px;
+            color: #65716b;
+            margin-bottom: 35px;
+        }
+
+        /* TITLE */
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 22px;
+            color: #222;
+        }
+
+        /* ROLE CARDS */
+
+        .roles {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .role-card {
+            width: 220px;
+            min-height: 190px;
+
+            border: 1px solid #dce5df;
+            border-radius: 8px;
+
+            background: white;
+
+            padding: 25px 18px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            text-decoration: none;
+            color: #222;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .role-card:hover {
+            border-color: #087b45;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+            transform: translateY(-3px);
+        }
+
+        .role-icon {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 27px;
+
+            margin-bottom: 14px;
+        }
+
+        .admin-icon {
+            background: #e7f6ed;
+        }
+
+        .manager-icon {
+            background: #e9f1fb;
+        }
+
+        .billing-icon {
+            background: #fff3df;
+        }
+
+        .role-name {
+            font-size: 13px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .role-description {
+            font-size: 10px;
+            line-height: 1.5;
+
+            color: #69736e;
+
+            max-width: 170px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 30px;
+
+            font-size: 10px;
+            color: #929b96;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+
+            .roles {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .role-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            <span class="cart">🛒</span>
+            <span class="logo-text">GROCERIA</span>
+        </div>
+
+        <p class="tagline">
+            Smart Wholesale Grocery Management System
+        </p>
+
+
+        <!-- TITLE -->
+
+        <h2>
+            Select Your Role
+        </h2>
+
+
+        <!-- ROLE OPTIONS -->
+
+        <div class="roles">
+
+            <!-- ADMIN -->
+
+            <a href="pages/admin-login.html">
+
+                <div class="role-icon admin-icon">
+                    👤
+                </div>
+
+                <div class="role-name">
+                    ADMIN
+                </div>
+
+                <div class="role-description">
+                    Full system access and management
+                </div>
+
+            </a>
+
+
+            <!-- MANAGER -->
+
+            <a href="pages/manager-login.html">
+
+                <div class="role-icon manager-icon">
+                    👤
+                </div>
+
+                <div class="role-name">
+                    MANAGER
+                </div>
+
+                <div class="role-description">
+                    Manage operations and reports
+                </div>
+
+            </a>
+
+
+            <!-- BILLING STAFF -->
+
+            <a href="pages/billing-login.html">
+
+                <div class="role-icon billing-icon">
+                    👤
+                </div>
+
+                <div class="role-name">
+                    BILLING STAFF
+                </div>
+
+                <div class="role-description">
+                    Handle billing and payments
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+            © 2026 GROCERIA. All rights reserved.
+        </div>
+
+    </div>
+
+</body>
+</html>

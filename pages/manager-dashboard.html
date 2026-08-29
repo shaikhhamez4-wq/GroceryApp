@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>GROCERIA - Manager Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8f6;
+            color: #26312b;
+        }
+
+        /* HEADER */
+
+        .top-header {
+            height: 62px;
+            background: #075c43;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 12px;
+        }
+
+        .profile {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: white;
+            color: #075c43;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        /* LAYOUT */
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 62px);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 225px;
+            background: white;
+
+            border-right: 1px solid #dce5df;
+
+            padding: 20px 12px;
+        }
+
+        .sidebar-title {
+            font-size: 10px;
+            color: #89928c;
+
+            text-transform: uppercase;
+
+            padding: 0 12px 12px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            margin-bottom: 4px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 11px 12px;
+
+            text-decoration: none;
+
+            color: #4d5952;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #e6f5ec;
+            color: #087b45;
+        }
+
+        .icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* CONTENT */
+
+        .content {
+            flex: 1;
+            padding: 28px;
+
+            overflow-x: auto;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        .heading p {
+            color: #7a847e;
+            font-size: 13px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 22px;
+        }
+
+        .card {
+            background: white;
+
+            border: 1px solid #dce5df;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            min-height: 115px;
+        }
+
+        .card-title {
+            color: #78817c;
+
+            font-size: 12px;
+
+            margin-bottom: 13px;
+        }
+
+        .card-value {
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+        .card-change {
+            margin-top: 8px;
+
+            color: #087b45;
+
+            font-size: 10px;
+        }
+
+        /* MAIN GRID */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 20px;
+        }
+
+        .box {
+            background: white;
+
+            border: 1px solid #dce5df;
+
+            border-radius: 8px;
+
+            padding: 20px;
+        }
+
+        .box-heading {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .box-heading h2 {
+            font-size: 15px;
+        }
+
+        .view {
+            color: #087b45;
+
+            text-decoration: none;
+
+            font-size: 11px;
+        }
+
+        /* SALES CHART */
+
+        .chart {
+            height: 240px;
+
+            padding: 15px 10px 25px 30px;
+        }
+
+        .chart-grid {
+            height: 190px;
+
+            border-left: 1px solid #dfe6e1;
+
+            border-bottom: 1px solid #dfe6e1;
+
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    #edf1ee 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                100% 38px;
+        }
+
+        .chart svg {
+            width: 100%;
+            height: 190px;
+        }
+
+        .months {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 9px;
+
+            color: #8b948e;
+
+            margin-top: 7px;
+        }
+
+        /* TASKS */
+
+        .tasks {
+            list-style: none;
+        }
+
+        .tasks li {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid #edf0ee;
+
+            font-size: 11px;
+        }
+
+        .task-icon {
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+
+            background: #e7f5ed;
+
+            color: #087b45;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-text strong {
+            display: block;
+
+            margin-bottom: 4px;
+        }
+
+        .task-text span {
+            color: #89928c;
+
+            font-size: 9px;
+        }
+
+        /* QUICK ACTIONS */
+
+        .quick-actions {
+            margin-top: 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .action {
+            background: white;
+
+            border: 1px solid #dce5df;
+
+            border-radius: 8px;
+
+            padding: 17px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .action:hover {
+            border-color: #087b45;
+
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .action h3 {
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+        .action p {
+            font-size: 10px;
+
+            color: #7b847f;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1000px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width:700px) {
+
+            .sidebar {
+                width: 65px;
+            }
+
+            .sidebar-title,
+            .menu span {
+                display: none;
+            }
+
+            .menu a {
+                justify-content: center;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+
+    <div class="header-right">
+
+        <span>🔔</span>
+
+        <span>⚙</span>
+
+        <span>Manager</span>
+
+        <div class="profile">
+            MG
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            Management
+        </div>
+
+
+        <ul class="menu">
+
+
+            <li>
+
+                <a href="manager-dashboard.html"
+                   class="active">
+
+                    <span class="icon">▦</span>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="products.html">
+
+                    <span class="icon">📦</span>
+
+                    <span>Products</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="customers.html">
+
+                    <span class="icon">👥</span>
+
+                    <span>Customers</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="suppliers.html">
+
+                    <span class="icon">🚚</span>
+
+                    <span>Suppliers</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="purchases.html">
+
+                    <span class="icon">🛒</span>
+
+                    <span>Purchases</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="sales.html">
+
+                    <span class="icon">🧾</span>
+
+                    <span>Sales / Billing</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="inventory.html">
+
+                    <span class="icon">📊</span>
+
+                    <span>Inventory</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="payments.html">
+
+                    <span class="icon">₹</span>
+
+                    <span>Payments</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="reports.html">
+
+                    <span class="icon">📈</span>
+
+                    <span>Reports</span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="../index.html">
+
+                    <span class="icon">↪</span>
+
+                    <span>Logout</span>
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+
+        <div class="heading">
+
+            <h1>
+                Manager Dashboard
+            </h1>
+
+            <p>
+                Overview of today's shop operations
+            </p>
+
+        </div>
+
+
+
+        <!-- STATISTICS -->
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Today's Sales
+                </div>
+
+                <div class="card-value">
+                    ₹ 18,750
+                </div>
+
+                <div class="card-change">
+                    ↑ 12.5% from yesterday
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Total Products
+                </div>
+
+                <div class="card-value">
+                    1,248
+                </div>
+
+                <div class="card-change">
+                    18 low stock items
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Today's Orders
+                </div>
+
+                <div class="card-value">
+                    86
+                </div>
+
+                <div class="card-change">
+                    ↑ 9 orders today
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Pending Payments
+                </div>
+
+                <div class="card-value">
+                    ₹ 6,200
+                </div>
+
+                <div class="card-change">
+                    5 pending payments
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CHART + TASKS -->
+
+        <div class="main-grid">
+
+
+            <!-- SALES -->
+
+            <section class="box">
+
+
+                <div class="box-heading">
+
+                    <h2>
+                        Sales Overview
+                    </h2>
+
+                    <a href="reports.html"
+                       class="view">
+
+                        View Reports
+
+                    </a>
+
+                </div>
+
+
+                <div class="chart">
+
+
+                    <div class="chart-grid">
+
+
+                        <svg
+                            viewBox="0 0 700 190"
+                            preserveAspectRatio="none">
+
+
+                            <polyline
+                                points="
+                                0,145
+                                80,125
+                                150,135
+                                220,90
+                                290,110
+                                360,70
+                                430,85
+                                500,48
+                                580,60
+                                700,22
+                                "
+                                fill="none"
+                                stroke="#087b45"
+                                stroke-width="3"
+                            />
+
+
+                            <circle
+                                cx="700"
+                                cy="22"
+                                r="5"
+                                fill="#087b45"
+                            />
+
+
+                        </svg>
+
+
+                    </div>
+
+
+                    <div class="months">
+
+                        <span>Jan</span>
+
+                        <span>Feb</span>
+
+                        <span>Mar</span>
+
+                        <span>Apr</span>
+
+                        <span>May</span>
+
+                        <span>Jun</span>
+
+                        <span>Jul</span>
+
+                        <span>Aug</span>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- MANAGER TASKS -->
+
+            <section class="box">
+
+
+                <div class="box-heading">
+
+                    <h2>
+                        Today's Tasks
+                    </h2>
+
+                    <a href="#"
+                       class="view">
+
+                        View All
+
+                    </a>
+
+                </div>
+
+
+                <ul class="tasks">
+
+
+                    <li>
+
+                        <div class="task-icon">
+                            ⚠
+                        </div>
+
+                        <div class="task-text">
+
+                            <strong>
+                                Low Stock Items
+                            </strong>
+
+                            <span>
+                                18 products need attention
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <div class="task-icon">
+                            🛒
+                        </div>
+
+                        <div class="task-text">
+
+                            <strong>
+                                Pending Purchases
+                            </strong>
+
+                            <span>
+                                4 purchase orders pending
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <div class="task-icon">
+                            ₹
+                        </div>
+
+                        <div class="task-text">
+
+                            <strong>
+                                Pending Payments
+                            </strong>
+
+                            <span>
+                                ₹6,200 to be collected
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <div class="task-icon">
+                            ✓
+                        </div>
+
+                        <div class="task-text">
+
+                            <strong>
+                                Daily Report
+                            </strong>
+
+                            <span>
+                                Report ready for review
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                </ul>
+
+
+            </section>
+
+
+        </div>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="quick-actions">
+
+
+            <div class="action"
+                 onclick="location.href='products.html'">
+
+                <div class="action-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Products
+                </h3>
+
+                <p>
+                    Manage products and stock
+                </p>
+
+            </div>
+
+
+            <div class="action"
+                 onclick="location.href='purchases.html'">
+
+                <div class="action-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Purchases
+                </h3>
+
+                <p>
+                    Manage purchase orders
+                </p>
+
+            </div>
+
+
+            <div class="action"
+                 onclick="location.href='inventory.html'">
+
+                <div class="action-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Inventory
+                </h3>
+
+                <p>
+                    Check current stock
+                </p>
+
+            </div>
+
+
+            <div class="action"
+                 onclick="location.href='reports.html'">
+
+                <div class="action-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Reports
+                </h3>
+
+                <p>
+                    View business reports
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

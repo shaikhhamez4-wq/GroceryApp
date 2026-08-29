@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GROCERIA - Sales & Billing</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f6;
+    color: #26312b;
+}
+
+/* HEADER */
+
+.top-header {
+    height: 62px;
+    background: #075c43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.profile {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: white;
+    color: #075c43;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 62px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 225px;
+    background: white;
+
+    border-right: 1px solid #dce5df;
+
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    font-size: 10px;
+    color: #89928c;
+
+    text-transform: uppercase;
+
+    padding: 0 12px 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 4px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+
+    color: #4d5952;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.icon {
+    width: 20px;
+    text-align: center;
+}
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+    padding: 28px;
+
+    overflow-x: auto;
+}
+
+.page-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.heading h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.heading p {
+    color: #7a847e;
+    font-size: 13px;
+}
+
+/* NEW BILL BUTTON */
+
+.add-button {
+    background: #087b45;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 12px 18px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: #066b3c;
+}
+
+/* SUMMARY */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 18px;
+}
+
+.summary-card p {
+    color: #7a847e;
+
+    font-size: 11px;
+
+    margin-bottom: 10px;
+}
+
+.summary-card h2 {
+    font-size: 22px;
+}
+
+/* SALES BOX */
+
+.sales-box {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 20px;
+}
+
+/* TOOLBAR */
+
+.toolbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.search {
+    width: 350px;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 12px;
+}
+
+.search:focus {
+    border-color: #087b45;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 1050px;
+}
+
+th {
+    background: #f6f9f7;
+
+    color: #68736c;
+
+    font-size: 10px;
+
+    text-align: left;
+
+    padding: 13px;
+
+    border-bottom: 1px solid #dce5df;
+}
+
+td {
+    padding: 14px 13px;
+
+    border-bottom: 1px solid #edf0ee;
+
+    font-size: 11px;
+}
+
+tr:hover {
+    background: #fafcfb;
+}
+
+.invoice-number {
+    font-weight: bold;
+}
+
+.invoice-date {
+    color: #89928c;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+.customer-name {
+    font-weight: 600;
+}
+
+/* BADGES */
+
+.badge {
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    display: inline-block;
+}
+
+.paid {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.pending {
+    background: #fff4dd;
+    color: #9a6700;
+}
+
+.completed {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.cancelled {
+    background: #fde8e8;
+    color: #b42318;
+}
+
+/* ACTIONS */
+
+.actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+.view,
+.print,
+.cancel {
+    border: none;
+
+    border-radius: 4px;
+
+    padding: 6px 9px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.view {
+    background: #eef2ff;
+    color: #4654a8;
+}
+
+.print {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.cancel {
+    background: #fde8e8;
+    color: #b42318;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal-box {
+    width: 650px;
+
+    max-width: 94%;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 8px;
+
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+}
+
+.close {
+    border: none;
+
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+/* FORM */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    color: #5e6862;
+
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 10px;
+
+    outline: none;
+
+    font-size: 12px;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087b45;
+}
+
+/* BILL ITEMS */
+
+.items-heading {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin: 10px 0;
+
+    color: #26312b;
+}
+
+.bill-items {
+    border: 1px solid #dce5df;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    margin-bottom: 15px;
+}
+
+.bill-item {
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+    gap: 8px;
+
+    padding: 10px;
+
+    border-bottom: 1px solid #edf0ee;
+
+    align-items: center;
+}
+
+.bill-item:last-child {
+    border-bottom: none;
+}
+
+.bill-item input,
+.bill-item select {
+    height: 34px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 4px;
+
+    padding: 0 7px;
+
+    font-size: 11px;
+
+    width: 100%;
+}
+
+.bill-total {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin: 15px 0;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+.save-button {
+    width: 100%;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #087b45;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #066b3c;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+
+    .summary {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar-title,
+    .menu span {
+        display: none;
+    }
+
+    .menu a {
+        justify-content: center;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+    <div class="header-right">
+
+        <span>🔔</span>
+
+        <span>⚙</span>
+
+        <span>Billing Staff</span>
+
+        <div class="profile">
+            BS
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Billing
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li>
+
+            <a href="billing-dashboard.html">
+
+                <span class="icon">▦</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="products.html">
+
+                <span class="icon">📦</span>
+
+                <span>Products</span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="customers.html">
+
+                <span class="icon">👥</span>
+
+                <span>Customers</span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="sales.html"
+               class="active">
+
+                <span class="icon">🧾</span>
+
+                <span>Sales / Billing</span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="payments.html">
+
+                <span class="icon">₹</span>
+
+                <span>Payments</span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="../index.html">
+
+                <span class="icon">↪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+    <!-- HEADING -->
+
+    <div class="page-heading">
+
+        <div class="heading">
+
+            <h1>
+                Sales & Billing
+            </h1>
+
+            <p>
+                Create and manage customer bills
+            </p>
+
+        </div>
+
+
+        <button
+            class="add-button"
+            onclick="openModal()">
+
+            + New Bill
+
+        </button>
+
+    </div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <p>
+                Today's Bills
+            </p>
+
+            <h2>
+                86
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Today's Sales
+            </p>
+
+            <h2>
+                ₹68,450
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Paid Bills
+            </p>
+
+            <h2>
+                79
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Pending Amount
+            </p>
+
+            <h2>
+                ₹4,850
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- SALES TABLE -->
+
+    <section class="sales-box">
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Search invoice, customer or phone..."
+                onkeyup="searchBills()">
+
+        </div>
+
+
+
+        <div class="table-container">
+
+
+            <table id="salesTable">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            INVOICE
+                        </th>
+
+                        <th>
+                            CUSTOMER
+                        </th>
+
+                        <th>
+                            DATE & TIME
+                        </th>
+
+                        <th>
+                            ITEMS
+                        </th>
+
+                        <th>
+                            TOTAL
+                        </th>
+
+                        <th>
+                            PAYMENT
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="invoice-number">
+                                INV-2026-001
+                            </div>
+
+                            <div class="invoice-date">
+                                #001
+                            </div>
+
+                        </td>
+
+                        <td class="customer-name">
+                            Rahul Sharma
+                        </td>
+
+                        <td>
+                            28 Aug 2026<br>
+                            10:42 AM
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            ₹2,450
+                        </td>
+
+                        <td>
+
+                            <span class="badge paid">
+                                Paid
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewBill()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="print"
+                                    onclick="printBill()">
+
+                                    Print
+
+                                </button>
+
+                                <button
+                                    class="cancel"
+                                    onclick="cancelBill()">
+
+                                    Cancel
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="invoice-number">
+                                INV-2026-002
+                            </div>
+
+                            <div class="invoice-date">
+                                #002
+                            </div>
+
+                        </td>
+
+                        <td class="customer-name">
+                            Priya Patil
+                        </td>
+
+                        <td>
+                            28 Aug 2026<br>
+                            11:18 AM
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            ₹1,850
+                        </td>
+
+                        <td>
+
+                            <span class="badge paid">
+                                Paid
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewBill()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="print"
+                                    onclick="printBill()">
+
+                                    Print
+
+                                </button>
+
+                                <button
+                                    class="cancel"
+                                    onclick="cancelBill()">
+
+                                    Cancel
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="invoice-number">
+                                INV-2026-003
+                            </div>
+
+                            <div class="invoice-date">
+                                #003
+                            </div>
+
+                        </td>
+
+                        <td class="customer-name">
+                            Amit Khan
+                        </td>
+
+                        <td>
+                            28 Aug 2026<br>
+                            12:05 PM
+                        </td>
+
+                        <td>
+                            8
+                        </td>
+
+                        <td>
+                            ₹3,720
+                        </td>
+
+                        <td>
+
+                            <span class="badge pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewBill()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="print"
+                                    onclick="printBill()">
+
+                                    Print
+
+                                </button>
+
+                                <button
+                                    class="cancel"
+                                    onclick="cancelBill()">
+
+                                    Cancel
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="invoice-number">
+                                INV-2026-004
+                            </div>
+
+                            <div class="invoice-date">
+                                #004
+                            </div>
+
+                        </td>
+
+                        <td class="customer-name">
+                            Sneha Deshmukh
+                        </td>
+
+                        <td>
+                            28 Aug 2026<br>
+                            01:24 PM
+                        </td>
+
+                        <td>
+                            5
+                        </td>
+
+                        <td>
+                            ₹2,180
+                        </td>
+
+                        <td>
+
+                            <span class="badge paid">
+                                Paid
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewBill()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="print"
+                                    onclick="printBill()">
+
+                                    Print
+
+                                </button>
+
+                                <button
+                                    class="cancel"
+                                    onclick="cancelBill()">
+
+                                    Cancel
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="invoice-number">
+                                INV-2026-005
+                            </div>
+
+                            <div class="invoice-date">
+                                #005
+                            </div>
+
+                        </td>
+
+                        <td class="customer-name">
+                            Arjun Verma
+                        </td>
+
+                        <td>
+                            28 Aug 2026<br>
+                            02:10 PM
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            ₹980
+                        </td>
+
+                        <td>
+
+                            <span class="badge paid">
+                                Paid
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge cancelled">
+                                Cancelled
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewBill()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="print"
+                                    onclick="printBill()">
+
+                                    Print
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- NEW BILL MODAL -->
+
+<div
+    class="modal"
+    id="billModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Create New Bill
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- CUSTOMER -->
+
+        <div class="form-row">
+
+
+            <div class="form-group">
+
+                <label>
+                    Customer
+                </label>
+
+                <select>
+
+                    <option>
+                        Walk-in Customer
+                    </option>
+
+                    <option>
+                        Rahul Sharma
+                    </option>
+
+                    <option>
+                        Priya Patil
+                    </option>
+
+                    <option>
+                        Amit Khan
+                    </option>
+
+                    <option>
+                        Sneha Deshmukh
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Payment Method
+                </label>
+
+                <select>
+
+                    <option>
+                        Cash
+                    </option>
+
+                    <option>
+                        UPI
+                    </option>
+
+                    <option>
+                        Debit / Credit Card
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="items-heading">
+            Bill Items
+        </div>
+
+
+
+        <div class="bill-items">
+
+
+            <div class="bill-item">
+
+                <select>
+
+                    <option>
+                        Select Product
+                    </option>
+
+                    <option>
+                        Rice 5 KG
+                    </option>
+
+                    <option>
+                        Milk 1 L
+                    </option>
+
+                    <option>
+                        Cooking Oil 1 L
+                    </option>
+
+                    <option>
+                        Biscuits
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="number"
+                    placeholder="Qty"
+                    value="1">
+
+
+                <input
+                    type="number"
+                    placeholder="Price"
+                    value="100">
+
+
+                <input
+                    type="number"
+                    placeholder="Total"
+                    value="100">
+
+            </div>
+
+
+            <div class="bill-item">
+
+                <select>
+
+                    <option>
+                        Select Product
+                    </option>
+
+                    <option>
+                        Rice 5 KG
+                    </option>
+
+                    <option>
+                        Milk 1 L
+                    </option>
+
+                    <option>
+                        Cooking Oil 1 L
+                    </option>
+
+                    <option>
+                        Biscuits
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="number"
+                    placeholder="Qty"
+                    value="1">
+
+
+                <input
+                    type="number"
+                    placeholder="Price"
+                    value="50">
+
+
+                <input
+                    type="number"
+                    placeholder="Total"
+                    value="50">
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="bill-total">
+
+            Total: ₹150
+
+        </div>
+
+
+
+        <button
+            class="save-button"
+            onclick="saveBill()">
+
+            Generate Bill
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+function openModal() {
+
+    document.getElementById(
+        "billModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeModal() {
+
+    document.getElementById(
+        "billModal"
+    ).style.display = "none";
+
+}
+
+
+function saveBill() {
+
+    alert(
+        "Bill generated successfully! Backend will be connected later."
+    );
+
+    closeModal();
+
+}
+
+
+function viewBill() {
+
+    alert(
+        "Bill details will be connected to the backend later."
+    );
+
+}
+
+
+function printBill() {
+
+    alert(
+        "Print bill function will be connected later."
+    );
+
+}
+
+
+function cancelBill() {
+
+    const result =
+        confirm(
+            "Are you sure you want to cancel this bill?"
+        );
+
+    if (result) {
+
+        alert(
+            "Bill cancelled! Backend will be connected later."
+        );
+
+    }
+
+}
+
+
+function searchBills() {
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
+
+
+    const rows =
+        document.querySelectorAll(
+            "#salesTable tbody tr"
+        );
+
+
+    rows.forEach(function(row) {
+
+        const text =
+            row.innerText.toLowerCase();
+
+
+        if (text.includes(search)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

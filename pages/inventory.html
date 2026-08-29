@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GROCERIA - Inventory</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f6;
+    color: #26312b;
+}
+
+/* HEADER */
+
+.top-header {
+    height: 62px;
+    background: #075c43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.profile {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    background: white;
+    color: #075c43;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 62px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 225px;
+    background: white;
+    border-right: 1px solid #dce5df;
+
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    font-size: 10px;
+    color: #89928c;
+
+    text-transform: uppercase;
+
+    padding: 0 12px 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 4px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+
+    color: #4d5952;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.icon {
+    width: 20px;
+    text-align: center;
+}
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+    padding: 28px;
+
+    overflow-x: auto;
+}
+
+.page-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.heading h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.heading p {
+    color: #7a847e;
+    font-size: 13px;
+}
+
+/* BUTTON */
+
+.add-button {
+    background: #087b45;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 12px 18px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: #066b3c;
+}
+
+/* SUMMARY */
+
+.summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 18px;
+}
+
+.summary-card p {
+    color: #7a847e;
+
+    font-size: 11px;
+
+    margin-bottom: 10px;
+}
+
+.summary-card h2 {
+    font-size: 22px;
+}
+
+/* INVENTORY BOX */
+
+.inventory-box {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 20px;
+}
+
+/* TOOLBAR */
+
+.toolbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.search {
+    width: 360px;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 12px;
+}
+
+.search:focus {
+    border-color: #087b45;
+}
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 1000px;
+}
+
+th {
+    background: #f6f9f7;
+
+    color: #68736c;
+
+    font-size: 10px;
+
+    text-align: left;
+
+    padding: 13px;
+
+    border-bottom: 1px solid #dce5df;
+}
+
+td {
+    padding: 14px 13px;
+
+    border-bottom: 1px solid #edf0ee;
+
+    font-size: 11px;
+}
+
+tr:hover {
+    background: #fafcfb;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-code {
+    color: #89928c;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+.category {
+    color: #5e6862;
+}
+
+.stock-number {
+    font-weight: bold;
+}
+
+/* STOCK STATUS */
+
+.badge {
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    display: inline-block;
+}
+
+.in-stock {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+.low-stock {
+    background: #fff4dd;
+    color: #9a6700;
+}
+
+.out-stock {
+    background: #fde8e8;
+    color: #b42318;
+}
+
+/* ACTIONS */
+
+.actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+.view,
+.adjust,
+.add-stock {
+    border: none;
+
+    border-radius: 4px;
+
+    padding: 6px 9px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.view {
+    background: #eef2ff;
+    color: #4654a8;
+}
+
+.adjust {
+    background: #fff4dd;
+    color: #9a6700;
+}
+
+.add-stock {
+    background: #e6f5ec;
+    color: #087b45;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal-box {
+    width: 480px;
+
+    max-width: 92%;
+
+    background: white;
+
+    border-radius: 8px;
+
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+}
+
+.close {
+    border: none;
+
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    color: #5e6862;
+
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 40px;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 0 10px;
+
+    outline: none;
+
+    font-size: 12px;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087b45;
+}
+
+.save-button {
+    width: 100%;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #087b45;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+
+    .summary {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar-title,
+    .menu span {
+        display: none;
+    }
+
+    .menu a {
+        justify-content: center;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+    <div class="header-right">
+
+        <span>🔔</span>
+
+        <span>⚙</span>
+
+        <span>Admin</span>
+
+        <div class="profile">
+            AD
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Management
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li>
+            <a href="admin-dashboard.html">
+
+                <span class="icon">▦</span>
+                <span>Dashboard</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="products.html">
+
+                <span class="icon">📦</span>
+                <span>Products</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="categories.html">
+
+                <span class="icon">▤</span>
+                <span>Categories</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="customers.html">
+
+                <span class="icon">👥</span>
+                <span>Customers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="suppliers.html">
+
+                <span class="icon">🚚</span>
+                <span>Suppliers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="purchases.html">
+
+                <span class="icon">🛒</span>
+                <span>Purchases</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="sales.html">
+
+                <span class="icon">🧾</span>
+                <span>Sales / Billing</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="inventory.html"
+               class="active">
+
+                <span class="icon">📊</span>
+                <span>Inventory</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="payments.html">
+
+                <span class="icon">₹</span>
+                <span>Payments</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="reports.html">
+
+                <span class="icon">📈</span>
+                <span>Reports</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="users.html">
+
+                <span class="icon">👤</span>
+                <span>Users</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="../index.html">
+
+                <span class="icon">↪</span>
+                <span>Logout</span>
+
+            </a>
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+    <div class="page-heading">
+
+        <div class="heading">
+
+            <h1>
+                Inventory
+            </h1>
+
+            <p>
+                Monitor and manage shop stock
+            </p>
+
+        </div>
+
+
+        <button
+            class="add-button"
+            onclick="openModal()">
+
+            + Add Stock
+
+        </button>
+
+    </div>
+
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <p>
+                Total Products
+            </p>
+
+            <h2>
+                248
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                In Stock
+            </p>
+
+            <h2>
+                216
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Low Stock
+            </p>
+
+            <h2>
+                24
+            </h2>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <p>
+                Out of Stock
+            </p>
+
+            <h2>
+                8
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- INVENTORY TABLE -->
+
+    <section class="inventory-box">
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Search product or category..."
+                onkeyup="searchInventory()">
+
+        </div>
+
+
+
+        <div class="table-container">
+
+
+            <table id="inventoryTable">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            PRODUCT
+                        </th>
+
+                        <th>
+                            CATEGORY
+                        </th>
+
+                        <th>
+                            CURRENT STOCK
+                        </th>
+
+                        <th>
+                            MIN. STOCK
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            LAST UPDATED
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="product-name">
+                                Rice 5 KG
+                            </div>
+
+                            <div class="product-code">
+                                PRD-001
+                            </div>
+
+                        </td>
+
+                        <td class="category">
+                            Grocery
+                        </td>
+
+                        <td class="stock-number">
+                            86
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+
+                            <span class="badge in-stock">
+                                In Stock
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Today, 10:30 AM
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewProduct()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="adjust"
+                                    onclick="adjustStock()">
+
+                                    Adjust
+
+                                </button>
+
+                                <button
+                                    class="add-stock"
+                                    onclick="openModal()">
+
+                                    Add
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="product-name">
+                                Cooking Oil 1 L
+                            </div>
+
+                            <div class="product-code">
+                                PRD-002
+                            </div>
+
+                        </td>
+
+                        <td class="category">
+                            Grocery
+                        </td>
+
+                        <td class="stock-number">
+                            12
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+
+                            <span class="badge low-stock">
+                                Low Stock
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Today, 09:45 AM
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewProduct()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="adjust"
+                                    onclick="adjustStock()">
+
+                                    Adjust
+
+                                </button>
+
+                                <button
+                                    class="add-stock"
+                                    onclick="openModal()">
+
+                                    Add
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="product-name">
+                                Milk 1 L
+                            </div>
+
+                            <div class="product-code">
+                                PRD-003
+                            </div>
+
+                        </td>
+
+                        <td class="category">
+                            Dairy
+                        </td>
+
+                        <td class="stock-number">
+                            0
+                        </td>
+
+                        <td>
+                            15
+                        </td>
+
+                        <td>
+
+                            <span class="badge out-stock">
+                                Out of Stock
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Yesterday, 08:20 PM
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewProduct()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="adjust"
+                                    onclick="adjustStock()">
+
+                                    Adjust
+
+                                </button>
+
+                                <button
+                                    class="add-stock"
+                                    onclick="openModal()">
+
+                                    Add
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="product-name">
+                                Biscuits
+                            </div>
+
+                            <div class="product-code">
+                                PRD-004
+                            </div>
+
+                        </td>
+
+                        <td class="category">
+                            Snacks
+                        </td>
+
+                        <td class="stock-number">
+                            145
+                        </td>
+
+                        <td>
+                            30
+                        </td>
+
+                        <td>
+
+                            <span class="badge in-stock">
+                                In Stock
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Today, 11:15 AM
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewProduct()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="adjust"
+                                    onclick="adjustStock()">
+
+                                    Adjust
+
+                                </button>
+
+                                <button
+                                    class="add-stock"
+                                    onclick="openModal()">
+
+                                    Add
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="product-name">
+                                Cold Drink 750 ML
+                            </div>
+
+                            <div class="product-code">
+                                PRD-005
+                            </div>
+
+                        </td>
+
+                        <td class="category">
+                            Beverages
+                        </td>
+
+                        <td class="stock-number">
+                            9
+                        </td>
+
+                        <td>
+                            15
+                        </td>
+
+                        <td>
+
+                            <span class="badge low-stock">
+                                Low Stock
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Today, 12:40 PM
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view"
+                                    onclick="viewProduct()">
+
+                                    View
+
+                                </button>
+
+                                <button
+                                    class="adjust"
+                                    onclick="adjustStock()">
+
+                                    Adjust
+
+                                </button>
+
+                                <button
+                                    class="add-stock"
+                                    onclick="openModal()">
+
+                                    Add
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- ADD STOCK MODAL -->
+
+<div
+    class="modal"
+    id="stockModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Add Stock
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Product
+            </label>
+
+            <select>
+
+                <option>
+                    Select Product
+                </option>
+
+                <option>
+                    Rice 5 KG
+                </option>
+
+                <option>
+                    Cooking Oil 1 L
+                </option>
+
+                <option>
+                    Milk 1 L
+                </option>
+
+                <option>
+                    Biscuits
+                </option>
+
+                <option>
+                    Cold Drink 750 ML
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Quantity to Add
+            </label>
+
+            <input
+                type="number"
+                placeholder="Enter quantity">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Supplier
+            </label>
+
+            <select>
+
+                <option>
+                    Select Supplier
+                </option>
+
+                <option>
+                    Rajesh Traders
+                </option>
+
+                <option>
+                    Fresh Dairy Ltd.
+                </option>
+
+                <option>
+                    Daily Needs Co.
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Purchase Price
+            </label>
+
+            <input
+                type="number"
+                placeholder="Enter purchase price">
+
+        </div>
+
+
+        <button
+            class="save-button"
+            onclick="saveStock()">
+
+            Add Stock
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+function openModal() {
+
+    document.getElementById(
+        "stockModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeModal() {
+
+    document.getElementById(
+        "stockModal"
+    ).style.display = "none";
+
+}
+
+
+function saveStock() {
+
+    alert(
+        "Stock added successfully! Backend will be connected later."
+    );
+
+    closeModal();
+
+}
+
+
+function viewProduct() {
+
+    alert(
+        "Product stock details will be connected later."
+    );
+
+}
+
+
+function adjustStock() {
+
+    alert(
+        "Stock adjustment will be connected to the backend later."
+    );
+
+}
+
+
+function searchInventory() {
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
+
+
+    const rows =
+        document.querySelectorAll(
+            "#inventoryTable tbody tr"
+        );
+
+
+    rows.forEach(function(row) {
+
+        const text =
+            row.innerText.toLowerCase();
+
+
+        if (text.includes(search)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

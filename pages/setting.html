@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GROCERIA - Settings</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f6;
+    color: #26312b;
+}
+
+/* HEADER */
+
+.top-header {
+    height: 62px;
+    background: #075c43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.profile {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: white;
+    color: #075c43;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+/* LAYOUT */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 62px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 225px;
+
+    background: white;
+
+    border-right: 1px solid #dce5df;
+
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    font-size: 10px;
+
+    color: #89928c;
+
+    text-transform: uppercase;
+
+    padding: 0 12px 12px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 4px;
+}
+
+.menu a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    text-decoration: none;
+
+    color: #4d5952;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #e6f5ec;
+
+    color: #087b45;
+}
+
+.icon {
+    width: 20px;
+
+    text-align: center;
+}
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+
+    padding: 28px;
+
+    overflow-x: auto;
+}
+
+.page-heading {
+    margin-bottom: 22px;
+}
+
+.heading h1 {
+    font-size: 25px;
+
+    margin-bottom: 6px;
+}
+
+.heading p {
+    color: #7a847e;
+
+    font-size: 13px;
+}
+
+/* SETTINGS LAYOUT */
+
+.settings-layout {
+    display: grid;
+
+    grid-template-columns: 210px 1fr;
+
+    gap: 20px;
+}
+
+/* SETTINGS MENU */
+
+.settings-menu {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+.settings-menu button {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    color: #59645e;
+
+    cursor: pointer;
+
+    margin-bottom: 3px;
+}
+
+.settings-menu button:hover,
+.settings-menu button.active {
+    background: #e6f5ec;
+
+    color: #087b45;
+
+    font-weight: bold;
+}
+
+/* SETTINGS CONTENT */
+
+.settings-content {
+    background: white;
+
+    border: 1px solid #dce5df;
+
+    border-radius: 8px;
+
+    padding: 25px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #edf0ee;
+}
+
+.section-title h2 {
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.section-title p {
+    color: #89928c;
+
+    font-size: 10px;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 2px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 10px;
+
+    color: #59645e;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #d4ddd7;
+
+    border-radius: 5px;
+
+    padding: 10px;
+
+    outline: none;
+
+    font-size: 12px;
+
+    font-family: Arial, sans-serif;
+
+    background: white;
+}
+
+.form-group input,
+.form-group select {
+    height: 40px;
+}
+
+.form-group textarea {
+    height: 85px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #087b45;
+}
+
+/* CHECKBOX */
+
+.checkbox-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    font-size: 11px;
+
+    color: #59645e;
+}
+
+.checkbox-group input {
+    width: 15px;
+
+    height: 15px;
+}
+
+/* SAVE */
+
+.save-area {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #edf0ee;
+}
+
+.cancel-button,
+.save-button {
+    height: 40px;
+
+    padding: 0 18px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: white;
+
+    border: 1px solid #d4ddd7;
+
+    color: #59645e;
+}
+
+.save-button {
+    background: #087b45;
+
+    border: none;
+
+    color: white;
+}
+
+/* HIDDEN SECTIONS */
+
+.settings-section {
+    display: none;
+}
+
+.settings-section.active {
+    display: block;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .settings-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-menu {
+        display: flex;
+
+        overflow-x: auto;
+
+        gap: 5px;
+    }
+
+    .settings-menu button {
+        min-width: 150px;
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .sidebar {
+        width: 65px;
+    }
+
+    .sidebar-title,
+    .menu span {
+        display: none;
+    }
+
+    .menu a {
+        justify-content: center;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+    <div class="brand">
+        🛒 GROCERIA
+    </div>
+
+    <div class="header-right">
+
+        <span>🔔</span>
+
+        <span>⚙</span>
+
+        <span>Admin</span>
+
+        <div class="profile">
+            AD
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Management
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li>
+            <a href="admin-dashboard.html">
+
+                <span class="icon">▦</span>
+                <span>Dashboard</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="products.html">
+
+                <span class="icon">📦</span>
+                <span>Products</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="categories.html">
+
+                <span class="icon">▤</span>
+                <span>Categories</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="customers.html">
+
+                <span class="icon">👥</span>
+                <span>Customers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="suppliers.html">
+
+                <span class="icon">🚚</span>
+                <span>Suppliers</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="purchases.html">
+
+                <span class="icon">🛒</span>
+                <span>Purchases</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="sales.html">
+
+                <span class="icon">🧾</span>
+                <span>Sales / Billing</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="inventory.html">
+
+                <span class="icon">📊</span>
+                <span>Inventory</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="payments.html">
+
+                <span class="icon">₹</span>
+                <span>Payments</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="reports.html">
+
+                <span class="icon">📈</span>
+                <span>Reports</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="users.html">
+
+                <span class="icon">👤</span>
+                <span>Users</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="settings.html"
+               class="active">
+
+                <span class="icon">⚙</span>
+                <span>Settings</span>
+
+            </a>
+        </li>
+
+
+        <li>
+            <a href="../index.html">
+
+                <span class="icon">↪</span>
+                <span>Logout</span>
+
+            </a>
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+    <div class="page-heading">
+
+        <div class="heading">
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Manage your shop and application settings
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="settings-layout">
+
+
+        <!-- SETTINGS MENU -->
+
+        <div class="settings-menu">
+
+
+            <button
+                class="active"
+                onclick="showSection('shop', this)">
+
+                🏪 Shop Information
+
+            </button>
+
+
+            <button
+                onclick="showSection('invoice', this)">
+
+                🧾 Invoice Settings
+
+            </button>
+
+
+            <button
+                onclick="showSection('tax', this)">
+
+                % Tax Settings
+
+            </button>
+
+
+            <button
+                onclick="showSection('payment', this)">
+
+                ₹ Payment Settings
+
+            </button>
+
+
+            <button
+                onclick="showSection('system', this)">
+
+                ⚙ System Preferences
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- SETTINGS CONTENT -->
+
+        <div class="settings-content">
+
+
+            <!-- SHOP INFORMATION -->
+
+            <section
+                id="shop"
+                class="settings-section active">
+
+
+                <div class="section-title">
+
+                    <h2>
+                        Shop Information
+                    </h2>
+
+                    <p>
+                        Basic information about your shop
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            SHOP NAME
+                        </label>
+
+                        <input
+                            type="text"
+                            value="GROCERIA">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            PHONE NUMBER
+                        </label>
+
+                        <input
+                            type="tel"
+                            value="+91 98765 43210">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            EMAIL ADDRESS
+                        </label>
+
+                        <input
+                            type="email"
+                            value="contact@groceria.com">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            WEBSITE
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="www.example.com">
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            SHOP ADDRESS
+                        </label>
+
+                        <textarea>Shop No. 12, Main Market,
+Aurangabad, Maharashtra</textarea>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- INVOICE -->
+
+            <section
+                id="invoice"
+                class="settings-section">
+
+
+                <div class="section-title">
+
+                    <h2>
+                        Invoice Settings
+                    </h2>
+
+                    <p>
+                        Configure your shop invoices
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            INVOICE PREFIX
+                        </label>
+
+                        <input
+                            type="text"
+                            value="INV">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            STARTING INVOICE NUMBER
+                        </label>
+
+                        <input
+                            type="number"
+                            value="1001">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            INVOICE TITLE
+                        </label>
+
+                        <input
+                            type="text"
+                            value="TAX INVOICE">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            CURRENCY
+                        </label>
+
+                        <select>
+
+                            <option selected>
+                                Indian Rupee (₹)
+                            </option>
+
+                            <option>
+                                US Dollar ($)
+                            </option>
+
+                            <option>
+                                Euro (€)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            FOOTER MESSAGE
+                        </label>
+
+                        <textarea>Thank you for shopping with GROCERIA!</textarea>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- TAX -->
+
+            <section
+                id="tax"
+                class="settings-section">
+
+
+                <div class="section-title">
+
+                    <h2>
+                        Tax Settings
+                    </h2>
+
+                    <p>
+                        Configure GST and tax information
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            GST NUMBER
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter GST number">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            DEFAULT TAX RATE
+                        </label>
+
+                        <select>
+
+                            <option>
+                                0%
+                            </option>
+
+                            <option selected>
+                                5%
+                            </option>
+
+                            <option>
+                                12%
+                            </option>
+
+                            <option>
+                                18%
+                            </option>
+
+                            <option>
+                                28%
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            CGST
+                        </label>
+
+                        <input
+                            type="number"
+                            value="2.5">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            SGST
+                        </label>
+
+                        <input
+                            type="number"
+                            value="2.5">
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- PAYMENT -->
+
+            <section
+                id="payment"
+                class="settings-section">
+
+
+                <div class="section-title">
+
+                    <h2>
+                        Payment Settings
+                    </h2>
+
+                    <p>
+                        Configure accepted payment methods
+                    </p>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Accept Cash Payments
+                    </span>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Accept UPI Payments
+                    </span>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Accept Card Payments
+                    </span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            UPI ID
+                        </label>
+
+                        <input
+                            type="text"
+                            value="groceria@upi">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            DEFAULT PAYMENT METHOD
+                        </label>
+
+                        <select>
+
+                            <option selected>
+                                UPI
+                            </option>
+
+                            <option>
+                                Cash
+                            </option>
+
+                            <option>
+                                Card
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- SYSTEM -->
+
+            <section
+                id="system"
+                class="settings-section">
+
+
+                <div class="section-title">
+
+                    <h2>
+                        System Preferences
+                    </h2>
+
+                    <p>
+                        Configure general application preferences
+                    </p>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Show low-stock notifications
+                    </span>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Show out-of-stock alerts
+                    </span>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span>
+                        Automatically generate invoice numbers
+                    </span>
+
+                </div>
+
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox">
+
+                    <span>
+                        Enable dark mode
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- SAVE -->
+
+            <div class="save-area">
+
+                <button
+                    class="cancel-button"
+                    onclick="location.reload()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    class="save-button"
+                    onclick="saveSettings()">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</main>
+
+</div>
+
+
+
+<script>
+
+function showSection(sectionId, button) {
+
+    const sections =
+        document.querySelectorAll(
+            ".settings-section"
+        );
+
+    sections.forEach(function(section) {
+
+        section.classList.remove("active");
+
+    });
+
+
+    document.getElementById(
+        sectionId
+    ).classList.add("active");
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".settings-menu button"
+        );
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+}
+
+
+function saveSettings() {
+
+    alert(
+        "Settings saved successfully! Backend will be connected later."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
